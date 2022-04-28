@@ -15,28 +15,27 @@ class SecondPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Center(
-            child: FutureBuilder(
-                future: getSingleUser(),
-                builder: (context, snap) {
-                  if (snap.connectionState == ConnectionState.waiting) {
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  } else {
-                    return Column(children: [
-                      Padding(
-                        padding: const EdgeInsets.all(80),
-                        child: CircleAvatar(
-                          radius: 90,
-                          backgroundImage: NetworkImage(
-                              (snap.data as dynamic)['data']['avatar']),
-                        ),
-                      ),
-                      Text((snap.data as dynamic)['data']['first_name'])
-                    ]);
-                  }
-                })),
+        child: FutureBuilder(
+            future: getSingleUser(),
+            builder: (context, snap) {
+              if (snap.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              } else {
+                return Column(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(80),
+                    child: CircleAvatar(
+                      radius: 90,
+                      backgroundImage: NetworkImage(
+                          (snap.data as dynamic)['data']['avatar']),
+                    ),
+                  ),
+                  Text((snap.data as dynamic)['data']['first_name'])
+                ]);
+              }
+            }),
       ),
     );
   }
